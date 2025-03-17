@@ -1,0 +1,137 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Ramen Rating App</title>
+      <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+      <header>
+        <div id="Ramen menu" class="ramen menu">
+          <img src="gyukotsu.jpg",alt="gyukotsu" style="width:300px;height:400px;">
+          <img src="naruto.jpg",alt="naruto" style="width:300px;height:400px;">
+          <img src="nirvana.jpg",alt="nirvana" style="width:300px;height:400px;">
+          <img src="shoyu.jpg",alt="shoyu"style="width:300px;height:400px;">
+          <img src="kojiro.jpg",alt="kojiro"style="width:300px;height:400px;">
+      
+        <h1>Ramen Rating App</h1>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#ramen-list">Ramen List</a></li>
+            <li><a href="#add-ramen">Add Ramen</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section id="home" class="active">
+          <h2>Welcome to the Ramen Rating App</h2>
+          <p>Rate and review your favorite ramen dishes from around the world!</p>
+          
+          <div class="card-container">
+            <div class="card">
+              <h3>Track Your Favorites</h3>
+              <p>Keep a record of all the ramen you've tried</p>
+            </div>
+            <div class="card">
+              <h3>Rate Your Experience</h3>
+              <p>Give ratings from 1-5 stars for each ramen dish</p>
+            </div>
+            <div class="card">
+              <h3>Share Your Thoughts</h3>
+              <p>Add comments and notes about your ramen experience</p>
+            </div>
+          </div>
+          
+          <div class="featured-ramen">
+            <h3>Featured Ramen</h3>
+            <div id="featured-ramen-container" class="ramen-container">
+              <!-- Featured ramen will be loaded here by JavaScript -->
+            </div>
+          </div>
+        </section>
+    
+        <section id="ramen-list">
+          <h2>Ramen List</h2>
+          <p>Browse and rate ramen dishes from your collection</p>
+          
+          <div class="filter-container">
+            <label for="rating-filter">Filter by rating:</label>
+            <select id="rating-filter">
+              <option value="all">All Ratings</option>
+              <option value="5">5 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="2">2 Stars</option>
+              <option value="1">1 Star</option>
+              <option value="0">Unrated</option>
+            </select>
+          </div>
+          
+          <div id="ramen-container" class="ramen-container">
+            <!-- Ramen items will be loaded here by JavaScript -->
+          </div>
+        </section>
+    
+        <section id="add-ramen">
+          <h2>Add New Ramen</h2>
+          <p>Add a new ramen dish to your collection</p>
+          
+          <form id="ramen-form">
+            <div class="form-group">
+              <label for="ramen-name">Ramen Name</label>
+              <input type="text" id="ramen-name" name="ramen-name" required>
+            </div>
+            <div class="form-group">
+              <label for="restaurant">Restaurant</label>
+              <input type="text" id="restaurant" name="restaurant" required>
+            </div>
+            <div class="form-group">
+              <label for="ramen-image">Image URL</label>
+              <input type="url" id="ramen-image" name="ramen-image" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="form-group">
+              <label for="initial-rating">Initial Rating</label>
+              <div class="star-rating">
+                <input type="radio" id="star5" name="initial-rating" value="5">
+                <label for="star5">★</label>
+                <input type="radio" id="star4" name="initial-rating" value="4">
+                <label for="star4">★</label>
+                <input type="radio" id="star3" name="initial-rating" value="3">
+                <label for="star3">★</label>
+                <input type="radio" id="star2" name="initial-rating" value="2">
+                <label for="star2">★</label>
+                <input type="radio" id="star1" name="initial-rating" value="1">
+                <label for="star1">★</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="comments">Comments</label>
+              <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+            <button type="submit">Add Ramen</button>
+          </form>
+        </section>
+    
+        <!-- Ramen Detail Modal -->
+        <div id="ramen-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="ramen-detail">
+              <!-- Ramen details will be loaded here -->
+            </div>
+          </div>
+        </div>
+      </main>
+    
+      <footer>
+        <p>&copy; 2025 Ramen Rating App. All rights reserved.</p>
+      </footer>
+    
+      <script src="app.js"></script>
+    </body>
+    </html>
+    
+    
