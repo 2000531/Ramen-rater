@@ -1,101 +1,56 @@
 document.addEventListener('DOMContentLoaded', main);
 
 const ramens = [
-    { id: 1, name: "kojiro", restaurant: "Ichiran", image: "kojiro.jpg", rating: 8, comment: "Classic and tasty." },
-    { id: 2, name: "naruto", restaurant: "Menya", image: "naruto.jpg", rating: 9, comment: "Rich and flavorful." },
-    { id: 3, name: "nirvana", restaurant: "Ramen-ya", image: "nirvana.jpg", rating: 7, comment: "Creamy broth." },
+    { id: 1, name: "kojiro", restaurant: "Ichiran", image: "kojiro.jpg", rating: 5, comment: "Classic and tasty." },
+    { id: 2, name: "naruto", restaurant: "Menya", image: "naruto.jpg", rating: 4, comment: "Rich and flavorful." },
+    { id: 3, name: "nirvana", restaurant: "Ramen-ya", image: "nirvana.jpg", rating: 5, comment: "Creamy broth." },
     { id: 4, name: "gyukotsu", restaurant: "Hot Spot", image: "gyukotsu.jpg", rating: 10, comment: "Absolutely amazing!" },
-    { id: 5, name: "shoyu", restaurant: "Green Bowl", image: "shoyu.jpg", rating: 6, comment: "Decent vegetarian option." },
+    { id: 5, name: "shoyu", restaurant: "Green Bowl", image: "shoyu.jpg", rating: 3, comment: "Decent vegetarian option." },
 ];
 
 function setupRamenImages() {
-    document.addEventListener('DOMContentLoaded', main);
-    
-    const ramens = [
-        { id: 1, name: "kojiro", restaurant: "Ichiran", image: "kojiro.jpg", rating: 8, comment: "Classic and tasty." },
-        { id: 2, name: "naruto", restaurant: "Menya", image: "naruto.jpg", rating: 9, comment: "Rich and flavorful." },
-        { id: 3, name: "nirvana", restaurant: "Ramen-ya", image: "nirvana.jpg", rating: 7, comment: "Creamy broth." },
-        { id: 4, name: "gyukotsu", restaurant: "Hot Spot", image: "gyukotsu.jpg", rating: 10, comment: "Absolutely amazing!" },
-        { id: 5, name: "shoyu", restaurant: "Green Bowl", image: "shoyu.jpg", rating: 6, comment: "Decent vegetarian option." },
-    ];
-    
-    function setupRamenImages() {
-        const ramenImages = document.querySelectorAll('#ramen-menu img');
-        ramenImages.forEach(img => {
-            img.addEventListener('click', handleClick);
-        });
-           if (ramens.length > 0) {
-            displayRamenDetails(ramens[0]);
-        }
-    }
-    
-    function handleClick(event) {
-        const ramenId = parseInt(event.target.dataset.id);
-        const selectedRamen = ramens.find(ramen => ramen.id === ramenId);
-        if (selectedRamen) {
-            displayRamenDetails(selectedRamen);
-        }
-    }
-    
-    function displayRamenDetails(ramen) {
-        const ramenDetail = document.getElementById('ramen-detail');
-        ramenDetail.innerHTML = `
-            <img src="${ramen.image}" alt="${ramen.name}">
-            <h2>${ramen.name}</h2>
-            <p><strong>Restaurant:</strong> ${ramen.restaurant}</p>
-            <p><strong>Rating:</strong> ${ramen.rating}/10</p>
-            <p><strong>Comment:</strong> ${ramen.comment}</p>
-        `;
-    }
-    
-    function addSubmitListener() {
-        const form = document.getElementById('new-ramen-form');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-    
-            const name = document.getElementById('name').value;
-            const restaurant = document.getElementById('restaurant').value;
-            const image = document.getElementById('image').value;
-            const rating = parseInt(document.getElementById('rating').value);
-            const comment = document.getElementById('comment').value;
-    
-            const newRamen = {
-                id: ramens.length + 1,
-                name: name,
-                restaurant: restaurant,
-                image: image,
-                rating: rating,
-                comment: comment
-            };
-    
-            ramens.push(newRamen);
-            // Add the new ramen image to the ramen-menu div
-            const newImg = document.createElement('img');
-            newImg.src = image;
-            newImg.alt = name;
-            newImg.dataset.id = ramens.length;
-            newImg.addEventListener('click', handleClick);
-            document.getElementById('ramen-menu').appendChild(newImg);
-    
-            form.reset();
-        });
-    }
-    
-    function main() {
-        setupRamenImages();
-        addSubmitListener();
-    }
-    const ramenImages = document.querySelectorAll('#ramen-menu img');
-    ramenImages.forEach(img => {
-        img.addEventListener('click', handleClick);
-    });
-    //Display the first ramen by default, like in the screenshot.
-    if (ramens.length > 0) {
-        displayRamenDetails(ramens[0]);
-    }
+  const ramenMenu = document.getElementById('ramen-menu');
+  ramenMenu.innerHTML = '';
+
+  ramens.forEach(ramen => {
+      const img = document.createElement('img');
+      img.src = ramen.image;
+      img.alt = ramen.name;
+      img.dataset.id = ramen.id;
+      img.addEventListener('click', handleClick);
+      ramenMenu.appendChild(img);
+  });
+
+  // Display the first ramen by default
+  if (ramens.length > 0) {
+      displayRamenDetails(ramens[0]);
+      // Highlight first image
+      document.querySelector('#ramen-menu img').style.borderColor = '#ff6b6b';
+  }
 }
 
+function displayRamenDetails(ramen) {
+  const ramenDetail = document.getElementById('ramen-details');
+  ramenDetail.innerHTML = `
+      <img src="${ramen.image}" alt="${ramen.name}" 
+             style="width:200px; height:150px; object-fit:cover; border-radius:8px; margin-bottom:15px;">
+      <h2>${ramen.name}</h2>
+      <p><strong>Restaurant:</strong> ${ramen.restaurant}</p>
+      <p><strong>Rating:</strong> ${ramen.rating}/10</p>
+      <p><strong>Comment:</strong> ${ramen.comment}</p>
+  `;
+}
+
+
 function handleClick(event) {
+    // Remove border from all images
+    document.querySelectorAll('#ramen-menu img').forEach(img => {
+        img.style.borderColor = 'transparent';
+    });
+    
+    // Add border to clicked image
+    event.target.style.borderColor = '#ff6b6b';
+    
     const ramenId = parseInt(event.target.dataset.id);
     const selectedRamen = ramens.find(ramen => ramen.id === ramenId);
     if (selectedRamen) {
@@ -103,8 +58,9 @@ function handleClick(event) {
     }
 }
 
+
 function displayRamenDetails(ramen) {
-    const ramenDetail = document.getElementById('ramen-detail');
+    const ramenDetail = document.getElementById('ramen-details');
     ramenDetail.innerHTML = `
         <img src="${ramen.image}" alt="${ramen.name}">
         <h2>${ramen.name}</h2>
@@ -147,10 +103,12 @@ function addSubmitListener() {
     });
 }
 
+
 function main() {
     setupRamenImages();
     addSubmitListener();
 }
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Load data from storage yangu yaani
